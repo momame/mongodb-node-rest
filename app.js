@@ -26,6 +26,10 @@ app.get('/', function(req, res) {
 // Return List of Places
 app.get('/api/places', function(req, res) {
   console.log('getting all locations');
+  var min_dis = req.query.min_dis; 
+   var max_dis = req.query.max_dis; 
+   console.log(min_dis);
+   console.log(max_dis);
   Location.find({})
     .exec(function(err, locations) {
       if(err) {
