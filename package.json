@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/momame/mongodb-node-rest/issues"
   },
-  "homepage": "https://github.com/momame/mongodb-node-rest#readme"
+  "homepage": "https://github.com/momame/mongodb-node-rest#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
 }
