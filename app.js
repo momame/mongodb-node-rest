@@ -39,7 +39,7 @@ app.get('/api/places', function(req, res) {
 // Return List of Places
 app.get('/api/places/favorites', function(req, res) {
   console.log('getting all favorite locations');
-  Location.find({ isFav: true })
+  Favorite.find()
     .exec(function(err, locations) {
       if(err) {
         res.send('error occured')
@@ -76,8 +76,7 @@ app.post('/api/places/location', function(req, res) {
   newPlace.country = req.body.country;
   newPlace.city = req.body.city;
   newPlace.address = req.body.address;
-  newPlace.isFav = req.body.isFav;
-
+    
   newPlace.save(function(err, location) {
     if(err) {
       res.send('error saving location');

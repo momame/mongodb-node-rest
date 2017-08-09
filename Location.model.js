@@ -9,11 +9,6 @@ var LocationSchema = new Schema({
   country: String,
   city: String,
   address: String,
-  isFav:{
-        type: Boolean,
-        default: false
-    },
-  created: { type: Date, default: Date.now },
 
 });
 
