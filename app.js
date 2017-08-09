@@ -92,3 +92,17 @@ app.put('/api/places/:location', function(req, res) {
     }
   });
 });
+
+
+app.delete('/api/places/:location', function(req, res) {
+  Location.findOneAndRemove({
+    _id: req.params.id
+  }, function(err, location) {
+    if(err) {
+      res.send('error removing')
+    } else {
+      console.log(location);
+      res.status(204);
+    }
+  });
+});
