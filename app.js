@@ -15,3 +15,4 @@ var port = 8080;
 var db = 'mongodb://localhost/example'
 
 mongoose.connect(db);
+
