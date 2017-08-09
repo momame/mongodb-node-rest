@@ -144,6 +144,18 @@ app.delete('/api/places/:location', function(req, res) {
   });
 });
 
+app.delete('/api/places/favorite/:favorite', function(req, res) {
+
+  Favorite.remove({'_id': req.params.id}, function(err, favorite) {
+    if(err) {
+      res.send('error removing')
+    } else {
+      console.log(favorite);
+      res.status(204);
+    }
+  });
+});
+
 
 app.listen(port, function() {
   console.log('app listening on port ' + port);
