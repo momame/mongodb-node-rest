@@ -16,3 +16,20 @@ var db = 'mongodb://localhost/example'
 
 mongoose.connect(db);
 
+app.get('/', function(req, res) {
+  res.send('happy to be here');
+});
+
+// Return List of Places
+app.get('/api/places', function(req, res) {
+  console.log('getting all locations');
+  Location.find({})
+    .exec(function(err, locations) {
+      if(err) {
+        res.send('error occured')
+      } else {
+        console.log(locations);
+        res.json(locations);
+      }
+    });
+});
