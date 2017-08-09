@@ -33,3 +33,18 @@ app.get('/api/places', function(req, res) {
       }
     });
 });
+
+app.get('/api/places/:location', function(req, res) {
+  console.log('getting one specific location');
+  Location.findOne({
+    _id: req.params.id
+    })
+    .exec(function(err, locations) {
+      if(err) {
+        res.send('error occured')
+      } else {
+        console.log(locations);
+        res.json(locations);
+      }
+    });
+});
