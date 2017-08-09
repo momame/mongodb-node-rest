@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + "/public" ));
+
 var mongoose = require('mongoose');
 var Location = require('./Location.model');
 
@@ -34,6 +36,21 @@ app.get('/api/places', function(req, res) {
     });
 });
 
+// Return List of Places
+app.get('/api/places/favorites', function(req, res) {
+  console.log('getting all favorite locations');
+  Location.find({ isFav: true })
+    .exec(function(err, locations) {
+      if(err) {
+        res.send('error occured')
+      } else {
+        console.log(locations);
+        res.json(locations);
+      }
+    });
+});
+
+
 app.get('/api/places/:location', function(req, res) {
   console.log('getting one specific location');
   Location.findOne({
@@ -59,6 +76,7 @@ app.post('/api/places/location', function(req, res) {
   newPlace.country = req.body.country;
   newPlace.city = req.body.city;
   newPlace.address = req.body.address;
+  newPlace.isFav = req.body.isFav;
 
   newPlace.save(function(err, location) {
     if(err) {
@@ -81,7 +99,8 @@ app.put('/api/places/:location', function(req, res) {
     			province : req.body.province,
     			country : req.body.country,
     			city : req.body.city,
-    			address : req.body.address
+                address : req.body.address,
+                isFav : req.body.isFav
     		 }
   }, {upsert: true}, function(err, newPlace) {
     if (err) {
