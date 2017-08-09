@@ -9,7 +9,6 @@ var LocationSchema = new Schema({
   country: String,
   city: String,
   address: String,
-
 });
 
 // make this available to our users in our Node applications

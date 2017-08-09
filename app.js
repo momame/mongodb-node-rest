@@ -12,6 +12,7 @@ app.use(express.static(__dirname + "/public" ));
 
 var mongoose = require('mongoose');
 var Location = require('./Location.model');
+var Favorite = require('./Favorite.model');
 
 var port = 8080;
 var db = 'mongodb://localhost/example'
@@ -83,6 +84,24 @@ app.post('/api/places/location', function(req, res) {
     } else {
       console.log(location);
       res.send(location);
+    }
+  });
+});
+
+
+app.post('/api/places/favorite', function(req, res) {
+  var newFav = new Favorite();
+
+  newFav.locationId = req.body.locationId;
+  newFav.created = req.body.created;
+  newFav.userId = req.body.userId;
+    
+  newFav.save(function(err, favorite) {
+    if(err) {
+      res.send('error saving favorite');
+    } else {
+      console.log(favorite);
+      res.send(favorite);
     }
   });
 });
