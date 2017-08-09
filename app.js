@@ -69,3 +69,26 @@ app.post('/api/places/location', function(req, res) {
     }
   });
 });
+
+
+app.put('/api/places/:location', function(req, res) {
+  Location.findOneAndUpdate({
+    _id: req.params.id
+    },
+    { $set: { locationName: req.body.locationName,
+    			description: req.body.description,
+    			zipCode : req.body.zipCode,
+    			province : req.body.province,
+    			country : req.body.country,
+    			city : req.body.city,
+    			address : req.body.address
+    		 }
+  }, {upsert: true}, function(err, newPlace) {
+    if (err) {
+      res.send('error updating ');
+    } else {
+      console.log(newPlace);
+      res.send(newPlace);
+    }
+  });
+});
