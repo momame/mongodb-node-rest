@@ -48,3 +48,24 @@ app.get('/api/places/:location', function(req, res) {
       }
     });
 });
+
+app.post('/api/places/location', function(req, res) {
+  var newPlace = new Location();
+
+  newPlace.locationName = req.body.locationName;
+  newPlace.description = req.body.description;
+  newPlace.zipCode = req.body.zipCode;
+  newPlace.province = req.body.province;
+  newPlace.country = req.body.country;
+  newPlace.city = req.body.city;
+  newPlace.address = req.body.address;
+
+  newPlace.save(function(err, location) {
+    if(err) {
+      res.send('error saving location');
+    } else {
+      console.log(location);
+      res.send(location);
+    }
+  });
+});
